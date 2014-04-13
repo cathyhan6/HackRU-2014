@@ -50,7 +50,7 @@ class Content(object):
     def __init__(self, node):
         self.node = node
         self.__dict__.update(node.attrib)
-        self.text = node.find('plaintext').text
+        self.text = node.find('img').text
 
 class Client(object):
     """
@@ -67,7 +67,8 @@ class Client(object):
             input=query,
             appid=self.app_id,
         ))
-        url = 'http://api.wolframalpha.com/v2/query?' + query + '&format=image'
+
+        url = 'http://api.wolframalpha.com/v2/query?appid=TTAVEX-73R7X8KQ9V&input=x%5E2&format=image'
         resp = urllib_request.urlopen(url)
         assert resp.headers.gettype() == 'text/xml'
         assert resp.headers.getparam('charset') == 'utf-8'
