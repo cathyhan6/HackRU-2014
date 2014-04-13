@@ -63,7 +63,7 @@ class Client(object):
             input=query,
             appid=self.app_id,
         ))
-        url = 'http://api.wolframalpha.com/v2/query?' + query
+        url = 'http://api.wolframalpha.com/v2/query?' + query + '&format=image'
         resp = urllib_request.urlopen(url)
         assert resp.headers.gettype() == 'text/xml'
         assert resp.headers.getparam('charset') == 'utf-8'

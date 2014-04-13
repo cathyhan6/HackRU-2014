@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, jsonify
 import sendgrid
 import json
 import wolframalpha
+import urllib
 
 app = Flask(__name__)
 clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
@@ -14,8 +15,11 @@ def getTextData():
 	userEmail = json.loads(request.values.get("envelope", None))["from"]
 	ourEmail = request.values.get("to", None)
 
+
 	res = clientW.query(text)
-	returnValue = next(res.results).text
+	returnValue = next(res.results)
+	print returnValue
+	urllib.urlretrieve(returnValue, 'data.png')
 	message = sendgrid.Mail()
 	message.add_to(userEmail)
 	print userEmail
