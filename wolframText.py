@@ -4,7 +4,7 @@ from twilio.rest import TwilioRestClient
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET, 'POST])
+@app.route("/", methods=['GET', 'POST'])
 def getTextData():
 	text = request.values.get('Body', none)
 	number = request.values.get('From', none)
