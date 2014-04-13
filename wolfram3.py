@@ -22,15 +22,18 @@ class wolfram(object):
         return xml
  
     def _xmlparser(self, xml):
-        data_dics = {}
+        data_dics = []
         tree = etree.fromstring(xml)
+        anInt = 0
         #retrieving every tag with label 'plaintext'
         for e in tree.findall('pod'):
             for item in [ef for ef in list(e) if ef.tag=='subpod']:
                 for it in [i for i in list(item) if i.tag=='img']:
                     if it.tag=='img':
                         default = 'wtf'
-                        data_dics[it.get('src', default)] = it.text
+                        """data_dics[it.get('src', default)] ="""
+                        data_dics.append(it.get('src', default))
+                        print "size: " + str(len(data_dics))
         return data_dics
  
     def search(self, ip):
@@ -40,12 +43,10 @@ class wolfram(object):
         #return result_dics 
         #print result_dics
         """print result_dics[]"""
-        for item in result_dics:
-            print item
         if(len(result_dics) >= 2):
-            return result_dics.keys()[1]
+            return result_dics[1]
         elif (len(result_dics) == 1):
-            return result_dics.keys()[0]
+            return result_dics[0]
         else: None
  
 """if __name__ == "__main__":
