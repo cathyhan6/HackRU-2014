@@ -12,7 +12,11 @@ class wolfram(object):
  
     def _get_xml(self, ip):
         url_params = {'input':ip, 'appid':self.appid}
+        print "did I get here: yes"
         data = urllib.urlencode(url_params)
+        print "data: " + data
+        data = data.replace('%2B', '+')
+        print "data: " + data
         req = urllib2.Request(self.base_url, data + '&format=image', self.headers)
         xml = urllib2.urlopen(req).read()
         return xml
@@ -31,11 +35,18 @@ class wolfram(object):
  
     def search(self, ip):
         xml = self._get_xml(ip)
+        print "ip : " + ip
         result_dics = self._xmlparser(xml)
         #return result_dics 
         #print result_dics
-        """print result_dics['Result']"""
-        return result_dics.keys()[1]
+        """print result_dics[]"""
+        for item in result_dics:
+            print item
+        if(len(result_dics) >= 2):
+            return result_dics.keys()[1]
+        elif (len(result_dics) == 1):
+            return result_dics.keys()[0]
+        else: None
  
 """if __name__ == "__main__":
     appid = sys.argv[1]

@@ -6,6 +6,8 @@ import wolframalpha
 import urllib
 import sys
 from wolfram3 import wolfram
+import uuid
+
 
 app = Flask(__name__)
 clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
@@ -19,6 +21,8 @@ def getTextData():
 	print 'text: ' + text
 	ourEmail = envelope['to'][0]
 	userEmail = envelope['from']
+	text = text.replace(' ', '+')
+	print "text: " + text
 
 	appid = "TTAVEX-73R7X8KQ9V"
 	query = text
@@ -26,7 +30,6 @@ def getTextData():
 	image = w.search(query)
 
 	print ("image: " + image)
-
 
 	r = requests.get(image, stream=True)
 	f = open('./image', 'wb')
