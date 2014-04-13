@@ -7,6 +7,7 @@ import urllib
 import sys
 from wolfram3 import wolfram
 import uuid
+import os
 
 
 app = Flask(__name__)
@@ -21,6 +22,7 @@ def getTextData():
 	print 'text: ' + text
 	ourEmail = envelope['to'][0]
 	userEmail = envelope['from']
+	userInput = text
 	text = text.replace(' ', '+')
 	print "text: " + text
 
@@ -30,9 +32,10 @@ def getTextData():
 	image = w.search(query)
 
 	print ("image: " + image)
+	unique_filename = unicode(uuid.uuid4())
 
 	r = requests.get(image, stream=True)
-	f = open('./image', 'wb')
+	f = open(unique_filename, 'wb')
 	if r.status_code == 200:
 		for chunk in r.iter_content():
 			f.write(chunk)
@@ -43,12 +46,14 @@ def getTextData():
 	message.add_to(userEmail)
 	print userEmail
 	print ourEmail
-	message.set_subject('Result')
-	message.set_text('success')
+	message.set_subject('Result for: ')
+	message.set_text(userInput)
 	message.set_from('AlphaText <' + ourEmail + '>')
-	message.add_attachment('image.png', './image')
+	message.add_attachment(unique_filename + '.png', unique_filename)
 	print clientSG._build_body(message)
 	print clientSG.send(message)
+    
+	os.remove(unique_filename)
 
 	return jsonify({})
 
