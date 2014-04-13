@@ -17,7 +17,7 @@ def getTextData():
 	ourEmail = envelope['from']
 
 	res = clientW.query(text)
-	returnValue = next(res.plot).main
+	returnValue = next(res.results).main
 	print returnValue
 	urllib.urlretrieve(returnValue, 'data.png')
 	message = sendgrid.Mail()

@@ -3,6 +3,9 @@ import sendgrid
 import json
 import wolframalpha
 import urllib
+import urllib2
+from urllib2 import Request
+import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
 clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
@@ -17,8 +20,13 @@ def getTextData():
 	ourEmail = envelope['from']
 
 
-	res = clientW.query(text)
-	returnValue = next(res.results)
+	xml_data=Request.urlopen("http://api.wolframalpha.com/v2/query?input=sqrt+2&appid=APLTT9-9WG78GYE65").read()
+	root = ET.fromstring(xml_data)
+
+	"""res = clientW.query(text)
+	returnValue = next(res.results).text"""
+
+	returnValue = root.firstChild
 	print returnValue
 	urllib.urlretrieve(returnValue, 'data.png')
 	message = sendgrid.Mail()

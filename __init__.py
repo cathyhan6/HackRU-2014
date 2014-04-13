@@ -25,9 +25,6 @@ class Result(object):
     def results(self):
         return (pod for pod in self if pod.title=='Result')
 
-    @property
-    def  plot(self):
-        return (pod for pod in self if pod.title=='Plot')    
 
 class Pod(object):
     def __init__(self, node):
@@ -50,7 +47,21 @@ class Content(object):
     def __init__(self, node):
         self.node = node
         self.__dict__.update(node.attrib)
-        self.text = node.find('img').text
+                       
+    def __iter__(self):
+        return (theImage(node) for node in self.node.findall('img'))
+                       
+                       
+class theImage(object):
+    def __init__(self, node):
+        self.node = node
+        self.__dict__.update(node.attrib)
+        self.text = node.find('src').text
+    
+
+
+                       
+                       
 
 class Client(object):
     """
