@@ -35,8 +35,8 @@ class wolfram(object):
         #print result_dics
         print result_dics['Result']
  
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     appid = sys.argv[1]
     query = sys.argv[2]
     w = wolfram(appid)
-    w.search(query)
+    w.search(query)"""
