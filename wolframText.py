@@ -6,17 +6,11 @@ import wolframalpha
 app = Flask(__name__)
 clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
 
-<<<<<<< HEAD
-@app.route("/", methods=['GET, 'POST])
-def doEverything():
-	text = request.values.get('Body', none)
-	number = request.values.get('From', none)
-=======
+
 @app.route("/", methods=['GET', 'POST'])
 def getTextData():
 	text = request.values.get('Body', None)
 	number = request.values.get('From', None)
->>>>>>> bb53d33fb07dd2cbae21ee5493962b9c9f95c03b
 
 	result = clientW.query(text)
 
