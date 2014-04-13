@@ -12,14 +12,15 @@ def getTextData():
 	text = request.values.get('Body', None)
 	number = request.values.get('From', None)
 
-	result = clientW.query(text)
+	res = clientW.query(text)
+	returnValue = next(res.results).text
 
 	account_sid = "ACc9712f9632cb63e46876bc4a62e476af"
 	auth_token = "a0f08f7a8d0870df130ee070b59009f0"
 	clientT = TwilioRestClient(account_sid, auth_token)
 
 	sms = clientT.sms.messages.create(
-		body = result, 
+		body = returnValue, 
 		to = number, 
 		from_= "+13477325742"
 		)
