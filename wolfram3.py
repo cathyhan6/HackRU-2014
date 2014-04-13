@@ -13,7 +13,7 @@ class wolfram(object):
     def _get_xml(self, ip):
         url_params = {'input':ip, 'appid':self.appid}
         data = urllib.urlencode(url_params)
-        req = urllib2.Request(self.base_url, data, self.headers)
+        req = urllib2.Request(self.base_url, data + '&format=image', self.headers)
         xml = urllib2.urlopen(req).read()
         return xml
  
@@ -23,9 +23,10 @@ class wolfram(object):
         #retrieving every tag with label 'plaintext'
         for e in tree.findall('pod'):
             for item in [ef for ef in list(e) if ef.tag=='subpod']:
-                for it in [i for i in list(item) if i.tag=='plaintext']:
-                    if it.tag=='plaintext':
-                        data_dics[e.get('title')] = it.text
+                for it in [i for i in list(item) if i.tag=='img']:
+                    if it.tag=='img':
+                        default = 'wtf'
+                        data_dics[it.get('src', default)] = it.text
         return data_dics
  
     def search(self, ip):
@@ -33,7 +34,8 @@ class wolfram(object):
         result_dics = self._xmlparser(xml)
         #return result_dics 
         #print result_dics
-        print result_dics['Result']
+        """print result_dics['Result']"""
+        return result_dics.keys()[1]
  
 """if __name__ == "__main__":
     appid = sys.argv[1]
