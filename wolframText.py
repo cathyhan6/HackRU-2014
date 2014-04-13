@@ -6,6 +6,10 @@ app = Flask(__name__)
 clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
 clientSG = sendgrid.SendGridClint("JakeRossSilverman", "cornell01")
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5babadabe6a63f85893ab0375629c8a7fc49b110
 @app.route("/wolf", methods=['GET', 'POST'])
 def getTextData():
 	text = request.values.get("text", None)
