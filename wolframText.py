@@ -4,7 +4,7 @@ import wolframalpha
 
 app = Flask(__name__)
 clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
-clientSG = sendgrid.SendGridClint("JakeRossSilverman", "cornell01")
+clientSG = sendgrid.SendGridClient("JakeRossSilverman", "cornell01")
 
 
 @app.route("/wolf", methods=['GET', 'POST'])
