@@ -7,7 +7,7 @@ app = Flask(__name__)
 clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/wolf", methods=['GET', 'POST'])
 def getTextData():
 	text = request.values.get('Body', None)
 	number = request.values.get('From', None)
