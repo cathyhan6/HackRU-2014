@@ -14,7 +14,8 @@ clientSG = sendgrid.SendGridClient("JakeRossSilverman", "cornell01")
 @app.route("/", methods=['POST'])
 def getTextData():
 	envelope = json.loads(request.form.get('envelope'))
-	text = request.form.get("text")
+	text = request.form.get('text')
+	print text
 	userEmail = envelope['to'][0]
 	ourEmail = envelope['from']
 
