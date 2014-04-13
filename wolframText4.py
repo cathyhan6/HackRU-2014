@@ -4,6 +4,7 @@ import json
 import wolframalpha
 import urllib
 import sys
+from wolfram3 wolfram
 
 app = Flask(__name__)
 clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
