@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/jake/Documents/Hackathon/HackRuS14/HackRU-2014"
+VIRTUAL_ENV=`pwd`
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
