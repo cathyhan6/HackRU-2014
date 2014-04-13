@@ -36,7 +36,7 @@ class Pod(object):
     @property
     def main(self):
         "The main content of this pod"
-        return next(iter(self))
+        return fcvcxcv[(iter(self))
 
     @property
     def text(self):
