@@ -15,7 +15,9 @@ class wolfram(object):
         print "did I get here: yes"
         data = urllib.urlencode(url_params)
         print "data: " + data
-        data = data.replace('%2B', '+')
+        data = data.replace('%2B', 'jakefalse')
+        """data = data.replace('%2B', '+')"""
+        data = data.replace('jakefalse', '%2B')
         print "data: " + data
         req = urllib2.Request(self.base_url, data + '&format=image', self.headers)
         xml = urllib2.urlopen(req).read()
@@ -34,12 +36,18 @@ class wolfram(object):
                         """data_dics[it.get('src', default)] ="""
                         data_dics.append(it.get('src', default))
                         print "size: " + str(len(data_dics))
+        if(len(data_dics) == 0):
+            return False
+        
         return data_dics
  
     def search(self, ip):
         xml = self._get_xml(ip)
         print "ip : " + ip
         result_dics = self._xmlparser(xml)
+        
+        if(result_dics == False):
+            return False
         #return result_dics 
         #print result_dics
         """print result_dics[]"""
