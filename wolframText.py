@@ -5,7 +5,7 @@ import json
 import wolframalpha
 import urllib
 import sys
-from wolfram3 import wolfram
+from wolframParser import wolfram
 import uuid
 import os
 
