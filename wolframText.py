@@ -8,11 +8,12 @@ import sys
 from wolframParser import wolfram
 import uuid
 import os
+import userStuff
 
 
 app = Flask(__name__)
-clientW = wolframalpha.Client("TTAVEX-73R7X8KQ9V")
-clientSG = sendgrid.SendGridClient("JakeRossSilverman", "cornell01")
+clientW = wolframalpha.Client(wolframKey)
+clientSG = sendgrid.SendGridClient(sendGridUsername, sendGridPass)
 
 
 @app.route("/", methods=['POST'])
@@ -38,10 +39,10 @@ def getTextData():
 		message.add_to(userEmail)
 		print userEmail
 		print ourEmail
-		message.set_subject('Result for: ' + userInput)
+		message.set_subject(' ')
 		message.set_text('No result available')
-		message.set_from('AlphaText <' + ourEmail + '>')
-		print clientSG._build_body(message)
+		message.set_from('JakeRossSilverman@gmail.com')
+		"""print clientSG._build_body(message)"""
 		print clientSG.send(message)
 	else:
 		unique_filename = unicode(uuid.uuid4())
